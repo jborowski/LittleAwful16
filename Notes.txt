@@ -3,9 +3,15 @@ Tasks:
 * Create Git repo DONE
 * Import latest ver. of Phaser DONE
 * Create basic state framework DONE
-* Create player class
-* Create test Level
-* Create level generation framework
+* Create player class DONE
+* Create test Level DONE
+* Create level generation framework DONE
+
+* Add player health status
+* Add totem mechanic
+* Add ice
+* Create initial tileset structure
+
 
 Random notes and thoughts:
 
@@ -16,7 +22,7 @@ Tile size: 80x80px
 
 Tree size: 2x1 tiles
 Rock size: 2x2 tiles
-Totem size: 3x2
+Totem size: 3x2 tiles
 
 Graphics assets:
 Intro screen
@@ -30,6 +36,10 @@ Totem
 Totem light animation
 Totem hue overlay
 Snow (~4 types of ground)
+Footsteps up
+Footsteps down
+Footsteps left
+Footsteps right
 Ice
 Broken ice
 Ice fall animation
