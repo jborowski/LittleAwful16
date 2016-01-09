@@ -9,7 +9,7 @@ import os
 import sys
 
 # global variables
-TILE_SIZE = 80
+TILE_SIZE = 40
 
 source = sys.argv[1]
 target = sys.argv[2]
@@ -35,11 +35,13 @@ for layer, tiles in input_data:
 
   tile_ids = {
     # white - ground
-    (255,255,255): 2,
-    # red - top of tree
-    (255,0,0): 3,
-    # green - bottom of tree
-    (0,255,0): 4,
+    (255,255,255,255): 2,
+    # red - totem (placeholder)
+    (255,0,0,255): 4,
+    # green - tree (placeholder)
+    (0,157,26,255): 3,
+    # yellow - river (placeholder)
+    (229, 226, 0,255): 5
   }
 
   for i in range(level_size_y):

@@ -21,7 +21,7 @@ ChillGame.Preloader.prototype = {
 
     this.game.load.image('tileset', 'assets/tileset.png');
 
-    this.game.load.spritesheet('player', 'assets/proto_pc.png', 80, 80);
+    this.game.load.spritesheet('player', 'assets/proto_pc.png', 40, 40);
     //this.game.load.text('level1Spawns', 'data/levels/Act-1/spawns.json');
     //this.game.load.audio('sfx', ['assets/sfx/sfx.ogg']);
     //music = this.game.add.audio('music');

@@ -19,7 +19,7 @@ ChillGame.testGameState.prototype = {
 
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
-    this.player = new Player(this, this.game, 10*gridSize, 10*gridSize, 'player');
+    this.player = new Player(this, this.game, 20*gridSize, 90*gridSize, 'player');
     this.game.camera.follow(this.player);
 
     this.keyboard = this.game.input.keyboard;

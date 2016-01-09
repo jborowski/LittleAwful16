@@ -1,3 +1,3 @@
-var gridSize = 80;
-var width = gridSize*10;
+var gridSize = 40;
+var width = gridSize*20;
 var height = width;
