@@ -36,6 +36,6 @@ SAGDX.Preloader.prototype = {
       this.ready = true;
       this.state.start('Intro'); */
     this.state.start('testGameState');
-    }
+    // }
   }
 };

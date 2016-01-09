@@ -1,4 +1,4 @@
-ChillGame.testGameState = function(game);
+ChillGame.testGameState = function(game){};
 
 ChillGame.testGameState.prototype = {
   // Settings

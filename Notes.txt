@@ -2,7 +2,7 @@ Tasks:
 
 * Create Git repo DONE
 * Import latest ver. of Phaser DONE
-* Create basic state framework
+* Create basic state framework DONE
 * Create player class
 * Create test Level
 * Create level generation framework
@@ -36,3 +36,9 @@ Ice fall animation
 Fog/darkness overlay
 Patch of grass
 Green ground
+
+
+TILESET COLOR CODES:
+Black: snow
+Red: Top of tree
+Green: Bottom of tree

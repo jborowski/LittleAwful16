@@ -9,7 +9,7 @@ import os
 import sys
 
 # global variables
-TILE_SIZE = 16
+TILE_SIZE = 80
 
 source = sys.argv[1]
 target = sys.argv[2]
@@ -19,8 +19,7 @@ print "Generating level from "+source+" to "+target
 # put the input png file and tileset image in the same folder as this script
 # provide the input/output data in the form of a list of tuples:
 # (input image filename, tileset filename, tileset scripting name)
-input_data = [( "foregroundLayer","tileset"),
-              ( "backgroundLayer","tileset"),
+input_data = [( "backgroundLayer","tileset"),
               ( "collisionLayer","tileset")]
 
 for layer, tiles in input_data:
@@ -35,28 +34,12 @@ for layer, tiles in input_data:
   formatted_data = []
 
   tile_ids = {
-    # Row 1
-    (142,0,172,255): 2,
-    (216,255,0,255): 3,
-    (155,76,229,255): 4,
-    (0,255,132,255): 5,
-    (103,111,20,255): 6,
-    # Row 2
-    (0,255,228,255): 8,
-    (201,150,51,255): 9,
-    (0,36,255,255): 10,
-    (118,147,0,255): 11,
-    (0,147,48,255): 12,
-    # Row 3
-    (255,0,252,255): 14,
-    (255,168,0,255): 15,
-    (253,134,252,255): 16,
-    (102,67,0,255): 17,
-    # Row 4
-    (77,72,63,255): 19,
-    (166,142,102,255): 20,
-    (121,77,0,255): 21,
-    (184,144,74,255): 22
+    # white - ground
+    (255,255,255): 2,
+    # red - top of tree
+    (255,0,0): 3,
+    # green - bottom of tree
+    (0,255,0): 4,
   }
 
   for i in range(level_size_y):
