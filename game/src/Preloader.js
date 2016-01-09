@@ -1,4 +1,4 @@
-SAGDX.Preloader = function (game) {
+ChillGame.Preloader = function (game) {
   this.loadBackground = null;
   this.preloadBar = null;
   this.SAlogo = null;
@@ -6,7 +6,7 @@ SAGDX.Preloader = function (game) {
   this.ready = false;
 };
 
-SAGDX.Preloader.prototype = {
+ChillGame.Preloader.prototype = {
 
   preload: function () {
     this.preloadBar = this.add.sprite(209, 356, 'loadBar');
@@ -16,11 +16,12 @@ SAGDX.Preloader.prototype = {
 
     this.load.setPreloadSprite(this.preloadBar);
 
-    //this.game.load.tilemap('introForegroundLayerMap', 'data/levels/Intro/foregroundLayer.json', null, Phaser.Tilemap.TILED_JSON);
+    this.game.load.tilemap('protoBackgroundMap', 'data/Levels/proto/backgroundLayer.json', null, Phaser.Tilemap.TILED_JSON);
+    this.game.load.tilemap('protoCollisionMap', 'data/Levels/proto/collisionLayer.json', null, Phaser.Tilemap.TILED_JSON);
 
-    //this.game.load.image('tileset', 'assets/tileset.png');
+    this.game.load.image('tileset', 'assets/tileset.png');
 
-    //this.game.load.spritesheet('factoryFace', 'assets/factoryFace.png', 80, 60);
+    this.game.load.spritesheet('player', 'assets/proto_pc.png', 80, 80);
     //this.game.load.text('level1Spawns', 'data/levels/Act-1/spawns.json');
     //this.game.load.audio('sfx', ['assets/sfx/sfx.ogg']);
     //music = this.game.add.audio('music');
