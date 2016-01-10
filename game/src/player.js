@@ -5,6 +5,7 @@ var Player = function(conflux, game, x, y, key, group) {
   group.add(this);
   this.body.allowGravity = false;
   this.body.collideWorldBounds = true;
+  this.body.setSize(20, 20, 10, 20);
 
   this.animations.add('down', [0, 1, 2], 10);
   this.animations.add('left', [3, 4, 5], 10);
@@ -26,6 +27,9 @@ var Player = function(conflux, game, x, y, key, group) {
   this.update = function(){
     this.body.velocity.x = 0;
     this.body.velocity.y = 0;
+    if(this.health > 0){
+      this.health -= 0.1;
+    }
     if(this.cursors.left.isDown){
       this.body.velocity.x = -1*this.speed;
       this.animations.play('left');
@@ -41,6 +45,10 @@ var Player = function(conflux, game, x, y, key, group) {
     } else {
       this.animations.stop();
     }
+  }
+
+  this.debugText = function(){
+    return "Health: " + String(this.health);
   }
 
 }

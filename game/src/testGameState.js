@@ -19,14 +19,23 @@ ChillGame.testGameState.prototype = {
 
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
-    this.player = new Player(this, this.game, 20*gridSize, 90*gridSize, 'player');
+    this.totems = this.game.add.group();
+    this.testTotem = new Totem(this, this.game, 50*gridSize, 70*gridSize, 'totem', this.totems);
+    this.testTotem2 = new Totem(this, this.game, 50*gridSize, 50*gridSize, 'totem', this.totems);
+
+    this.player = new Player(this, this.game, 50*gridSize, 90*gridSize, 'player');
     this.game.camera.follow(this.player);
 
     this.keyboard = this.game.input.keyboard;
+
+    this.debugText = this.game.add.text(5, 50, 'DEBUG INFO\n', { fontSize: '10px', fill: '#000' });
+    this.debugText.fixedToCamera = true;
   },
 
   update: function(){
     this.game.physics.arcade.collide(this.player, this.collisionLayer);
+    this.game.physics.arcade.collide(this.player, this.totems);
+    this.debugText.text = "Player "+this.player.debugText()+"\n";
   },
 
   goToState: function(state){
