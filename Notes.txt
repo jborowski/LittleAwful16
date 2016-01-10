@@ -6,13 +6,20 @@ Tasks:
 * Create player class DONE
 * Create test Level DONE
 * Create level generation framework DONE
+* Add player health status DONE
+* Adjust player hitbox DONE
+* Add totem mechanic DONE
 
-* Add player health status
-* Adjust player hitbox
-* Add totem mechanic
+
 * Add ice
 * Create initial tileset structure
 
+TOTEMS:
+60, 52
+91, 70
+21, 30
+37, 12
+6, 6
 
 Random notes and thoughts:
 

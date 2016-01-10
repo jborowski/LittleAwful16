@@ -20,8 +20,11 @@ ChillGame.testGameState.prototype = {
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
     this.totems = this.game.add.group();
-    this.testTotem = new Totem(this, this.game, 50*gridSize, 70*gridSize, 'totem', this.totems);
-    this.testTotem2 = new Totem(this, this.game, 50*gridSize, 50*gridSize, 'totem', this.totems);
+    this.totem1 = new Totem(this, this.game, 60*gridSize, 52*gridSize, 'totem', this.totems);
+    this.totem2 = new Totem(this, this.game, 91*gridSize, 70*gridSize, 'totem', this.totems);
+    this.totem3 = new Totem(this, this.game, 21*gridSize, 30*gridSize, 'totem', this.totems);
+    this.totem4 = new Totem(this, this.game, 37*gridSize, 12*gridSize, 'totem', this.totems);
+    this.totem5 = new Totem(this, this.game, 6*gridSize, 6*gridSize, 'totem', this.totems);
 
     this.player = new Player(this, this.game, 50*gridSize, 90*gridSize, 'player');
     this.game.camera.follow(this.player);
