@@ -20,28 +20,34 @@ var Player = function(conflux, game, x, y, key, group) {
 
   this.conflux = conflux;
 
-  this.speed = 5*gridSize;
+  this.speed = 3*gridSize;
 
   this.health = 100;
+
+  this.facing = Math.PI/2;
 
   this.update = function(){
     this.body.velocity.x = 0;
     this.body.velocity.y = 0;
     if(this.health > 0){
-      this.health -= 0.1;
+      this.health -= 0.05;
     }
     if(this.cursors.left.isDown){
       this.body.velocity.x = -1*this.speed;
       this.animations.play('left');
+      this.facing = 0;
     } else if(this.cursors.right.isDown){
       this.body.velocity.x = this.speed;
       this.animations.play('right');
+      this.facing = Math.PI;
     } else if(this.cursors.up.isDown){
       this.body.velocity.y = -1*this.speed;
       this.animations.play('up');
+      this.facing = Math.PI/2;
     } else if(this.cursors.down.isDown){
       this.body.velocity.y = this.speed;
       this.animations.play('down');
+      this.facing = Math.PI*3/2;
     } else {
       this.animations.stop();
     }
