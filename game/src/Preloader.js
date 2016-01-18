@@ -21,6 +21,7 @@ ChillGame.Preloader.prototype = {
 
     this.game.load.image('tileset', 'assets/tileset.png');
     this.game.load.image('whiteOverlay', 'assets/overlay_white.png');
+    this.game.load.image('totemGlow', 'assets/totem_glow.png');
 
     this.game.load.spritesheet('player', 'assets/proto_pc.png', 40, 40);
     this.game.load.spritesheet('totem', 'assets/totem.png', 80, 120);

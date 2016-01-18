@@ -37,6 +37,10 @@ ChillGame.testGameState.prototype = {
     this.whiteout.anchor.setTo(0.5, 0.5);
     this.whiteout.alpha = 0;
 
+    this.totems.forEach(function(item){
+      item.glowToTop();
+    }, this);
+
     this.sightAngle = Math.PI/2;
 	  this.numberOfRays = 50;
 	  this.rayLength = 4*gridSize;
