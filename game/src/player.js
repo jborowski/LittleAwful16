@@ -5,12 +5,12 @@ var Player = function(conflux, game, x, y, key, group) {
   group.add(this);
   this.body.allowGravity = false;
   this.body.collideWorldBounds = true;
-  this.body.setSize(20, 20, 10, 20);
+  this.body.setSize(22, 20, 0, 18);
 
-  this.animations.add('down', [0, 1, 2], 10);
-  this.animations.add('left', [3, 4, 5], 10);
-  this.animations.add('right', [6, 7, 8], 10);
-  this.animations.add('up', [9, 10, 11], 10);
+  this.animations.add('down', [0, 1, 2], 5);
+  this.animations.add('left', [3, 4, 5], 5);
+  this.animations.add('right', [6, 7, 8], 5);
+  this.animations.add('up', [9, 10, 11], 5);
   this.animations.add('standDown', [0]);
   this.animations.add('standLeft', [3]);
   this.animations.add('standRight', [6]);
@@ -20,31 +20,35 @@ var Player = function(conflux, game, x, y, key, group) {
 
   this.conflux = conflux;
 
-  this.speed = 3*gridSize;
+  this.speed = 2*gridSize;
 
   this.health = 100;
 
   this.facing = Math.PI/2;
 
+  this.totemsFound = 0;
+
+  this.blocked = false;
+
   this.update = function(){
     this.body.velocity.x = 0;
     this.body.velocity.y = 0;
-    if(this.health > 0){
-      this.health -= 0.05;
+    if(this.health > 0 && this.y >= gridSize*10){
+      this.health -= 0.025;
     }
-    if(this.cursors.left.isDown){
+    if(!this.blocked && this.cursors.left.isDown){
       this.body.velocity.x = -1*this.speed;
       this.animations.play('left');
       this.facing = 0;
-    } else if(this.cursors.right.isDown){
+    } else if(!this.blocked && this.cursors.right.isDown){
       this.body.velocity.x = this.speed;
       this.animations.play('right');
       this.facing = Math.PI;
-    } else if(this.cursors.up.isDown){
+    } else if(!this.blocked && this.cursors.up.isDown){
       this.body.velocity.y = -1*this.speed;
       this.animations.play('up');
       this.facing = Math.PI/2;
-    } else if(this.cursors.down.isDown){
+    } else if(!this.blocked && this.cursors.down.isDown){
       this.body.velocity.y = this.speed;
       this.animations.play('down');
       this.facing = Math.PI*3/2;

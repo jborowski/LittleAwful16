@@ -6,6 +6,8 @@ ChillGame.testGameState.prototype = {
 
   create: function(){
 
+    this.game.stage.backgroundColor = '#000000';
+
     this.map = this.game.add.tilemap('protoBackgroundMap');
     this.map.addTilesetImage('tileset');
     this.backgroundLayer = this.map.createLayer('backgroundLayer');
@@ -20,18 +22,33 @@ ChillGame.testGameState.prototype = {
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
     this.totems = this.game.add.group();
-    this.totem1 = new Totem(this, this.game, 60*gridSize, 52*gridSize, 'totem', this.totems);
-    this.totem2 = new Totem(this, this.game, 91*gridSize, 70*gridSize, 'totem', this.totems);
-    this.totem3 = new Totem(this, this.game, 21*gridSize, 30*gridSize, 'totem', this.totems);
-    this.totem4 = new Totem(this, this.game, 37*gridSize, 12*gridSize, 'totem', this.totems);
-    this.totem5 = new Totem(this, this.game, 6*gridSize, 6*gridSize, 'totem', this.totems);
+    this.totem1 = new Totem(this, this.game, 60*gridSize, 64*gridSize, 'totem', this.totems);
+    this.totem2 = new Totem(this, this.game, 21*gridSize, 41*gridSize, 'totem', this.totems);
+    this.totem3 = new Totem(this, this.game, 6*gridSize, 18*gridSize, 'totem', this.totems);
+    this.totem4 = new Totem(this, this.game, 37*gridSize, 22*gridSize, 'totem', this.totems);
+    this.totem5 = new Totem(this, this.game, 67*gridSize, 22*gridSize, 'totem', this.totems);
+    this.totem6 = new Totem(this, this.game, 91*gridSize, 29*gridSize, 'totem', this.totems);
+
+    this.gate = this.game.add.sprite(46*gridSize, 10*gridSize-28, 'gate');
+    this.game.physics.arcade.enable(this.gate);
+    this.gate.body.immovable = true;
+
+    this.endDude = this.game.add.sprite(48*gridSize, 5*gridSize, 'player');
+    this.game.physics.arcade.enable(this.endDude);
+    this.endDude.body.immovable = true;
+    this.endDude.frame = 1;
 
     this.maskGraphics = this.game.add.graphics(0, 0);
     this.backgroundLayer.mask = this.maskGraphics;
     this.totems.mask = this.maskGraphics;
+    this.gate.mask = this.maskGraphics;
 
-    this.player = new Player(this, this.game, 50*gridSize, 90*gridSize, 'player');
+    this.player = new Player(this, this.game, 50*gridSize, 92*gridSize, 'player');
     this.game.camera.follow(this.player);
+
+    this.fog = this.game.add.tileSprite(0, 0, this.game.world.width, this.game.world.height, 'fogOverlay');
+    this.fog.alpha = 0.75;
+    this.fog.mask = this.maskGraphics;
 
     this.whiteout = this.game.add.sprite(this.player.x+20, this.player.y+20, 'whiteOverlay');
     this.whiteout.anchor.setTo(0.5, 0.5);
@@ -42,7 +59,7 @@ ChillGame.testGameState.prototype = {
     }, this);
 
     this.sightAngle = Math.PI/2;
-	  this.numberOfRays = 50;
+	  this.numberOfRays = 20;
 	  this.rayLength = 4*gridSize;
 
     this.keyboard = this.game.input.keyboard;
@@ -50,14 +67,42 @@ ChillGame.testGameState.prototype = {
     this.debugText = this.game.add.text(5, 50, 'DEBUG INFO\n', { fontSize: '10px', fill: '#FFF' });
     this.debugText.fixedToCamera = true;
 
+    if (firstLoad) {
+      this.title = this.game.add.sprite(this.game.camera.x, this.game.camera.y + 2*gridSize, 'title');
+      this.titleTween = this.game.add.tween(this.title).to( { alpha: 0 }, 3000, "Linear", true);
+      this.titleTween.onComplete.add(function(){this.title.kill()}, this);
+    }
+
+    firstLoad = false;
+
   },
 
   update: function(){
+    if(this.player.health <= 1){
+      this.goToState('failState');
+    }
+
+    this.title.x = this.camera.x;
+    this.title.y = this.camera.y + 2*gridSize;
+
+    this.gate.frame = this.player.totemsFound;
+    if (this.player.totemsFound == 6){
+      this.gate.kill();
+      this.player.totemsFound = 0;
+    }
+
+    if (this.game.physics.arcade.distanceBetween(this.endDude, this.player) <= 1*gridSize){
+      this.player.blocked = true;
+      // ADD WIN STATE HERE
+    }
+
     this.game.physics.arcade.collide(this.player, this.collisionLayer);
     this.game.physics.arcade.collide(this.player, this.totems);
+    this.game.physics.arcade.collide(this.player, this.gate);
 
-    this.whiteout.x = this.player.x+20;
+    this.whiteout.x = this.player.x+10;
     this.whiteout.y = this.player.y+20;
+    this.fog.tilePosition.x += 0.5;
     this.whiteout.alpha = (101 - this.player.health) / 100;
 
     this.maskGraphics.clear();

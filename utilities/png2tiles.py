@@ -35,13 +35,19 @@ for layer, tiles in input_data:
 
   tile_ids = {
     # white - ground
-    (255,255,255,255): 2,
-    # red - totem (placeholder)
-    (255,0,0,255): 4,
-    # green - tree (placeholder)
-    (0,157,26,255): 3,
-    # yellow - river (placeholder)
-    (229, 226, 0,255): 5
+    (255,255,255,255): 1,
+    # red - totem
+    (255,0,0,255): 1,
+    # green - tree
+    (0,157,26,255): 5,
+    # yellow - river
+    (229, 226, 0,255): 4,
+    # lblue - steps_horizontal
+    (171, 255, 244, 255): 2,
+    # lgreen - steps_vertical
+    (171, 255, 181, 255): 3,
+    # gray - rock
+    (172, 165, 165, 255): 6
   }
 
   for i in range(level_size_y):

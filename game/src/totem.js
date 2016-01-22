@@ -18,9 +18,10 @@ var Totem = function(conflux, game, x, y, key, group) {
     this.playerProximity = game.physics.arcade.distanceBetween(conflux.player, this);
     if(!this.active && (this.playerProximity < 2*gridSize)){
       this.active = true;
+      conflux.player.totemsFound += 1;
       game.add.tween(this.glow).to( { alpha: 0.5 }, 1000, "Linear", true);
     }
-    if(this.active && (this.playerProximity < 5*gridSize) && conflux.player.health < 100){
+    if(this.active && (this.playerProximity < 4*gridSize) && conflux.player.health < 100){
       conflux.player.health += 0.4
     }
   }
