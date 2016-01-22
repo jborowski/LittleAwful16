@@ -30,8 +30,11 @@ ChillGame.Preloader.prototype = {
     this.game.load.spritesheet('gate', 'assets/gate.png', 160, 80);
 
     //this.game.load.text('level1Spawns', 'data/levels/Act-1/spawns.json');
-    //this.game.load.audio('sfx', ['assets/sfx/sfx.ogg']);
-    //music = this.game.add.audio('music');
+    this.game.load.audio('wind', ['assets/wind.ogg']);
+    this.game.load.audio('cold', ['assets/cold.ogg']);
+    this.game.load.audio('totem', ['assets/totem.ogg']);
+    this.game.load.audio('steps', ['assets/step.ogg']);
+    this.game.load.audio('finalMusic', ['assets/finalmusic.ogg']);
     //this.game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
   },
 
@@ -40,10 +43,9 @@ ChillGame.Preloader.prototype = {
   },
 
   update: function () {
-    /* if (this.cache.isSoundDecoded('music') && this.ready == false) {
+    if (this.cache.isSoundDecoded('wind') && this.ready == false) {
       this.ready = true;
-      this.state.start('Intro'); */
-    this.state.start('testGameState');
-    // }
+      this.state.start('testGameState');
+    }
   }
 };

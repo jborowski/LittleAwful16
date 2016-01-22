@@ -16,6 +16,5 @@ window.onload = function(){
   game.state.add('Preloader', ChillGame.Preloader)
   game.state.add('testGameState', ChillGame.testGameState);
   game.state.add('failState', ChillGame.failState);
-  game.state.add('winState', ChillGame.winState);
   game.state.start('Boot');
 }

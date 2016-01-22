@@ -37,6 +37,7 @@ ChillGame.testGameState.prototype = {
     this.game.physics.arcade.enable(this.endDude);
     this.endDude.body.immovable = true;
     this.endDude.frame = 1;
+    this.endDude.anchor.setTo(0.5, 0.5);
 
     this.maskGraphics = this.game.add.graphics(0, 0);
     this.backgroundLayer.mask = this.maskGraphics;
@@ -59,13 +60,23 @@ ChillGame.testGameState.prototype = {
     }, this);
 
     this.sightAngle = Math.PI/2;
-	  this.numberOfRays = 20;
+	  this.numberOfRays = 50;
 	  this.rayLength = 4*gridSize;
 
     this.keyboard = this.game.input.keyboard;
 
-    this.debugText = this.game.add.text(5, 50, 'DEBUG INFO\n', { fontSize: '10px', fill: '#FFF' });
-    this.debugText.fixedToCamera = true;
+    //this.debugText = this.game.add.text(5, 50, 'DEBUG INFO\n', { fontSize: '10px', fill: '#FFF' });
+    //this.debugText.fixedToCamera = true;
+
+    this.wind = this.game.add.audio('wind', 0.4, true);
+    this.wind.play();
+
+    this.coldSound = this.game.add.audio('cold', 0, true);
+    this.coldSound.play();
+
+    this.totemSound = this.game.add.audio('totem', 1, false);
+
+    this.finalMusic = this.game.add.audio('finalMusic', 0.4, false);
 
     if (firstLoad) {
       this.title = this.game.add.sprite(this.game.camera.x, this.game.camera.y + 2*gridSize, 'title');
@@ -79,6 +90,10 @@ ChillGame.testGameState.prototype = {
 
   update: function(){
     if(this.player.health <= 1){
+      this.wind.stop();
+      this.coldSound.stop();
+      this.player.steps.stop();
+      this.player.blocked = true;
       this.goToState('failState');
     }
 
@@ -93,7 +108,9 @@ ChillGame.testGameState.prototype = {
 
     if (this.game.physics.arcade.distanceBetween(this.endDude, this.player) <= 1*gridSize){
       this.player.blocked = true;
-      // ADD WIN STATE HERE
+      this.finalTween = this.game.add.tween(this.game.world).to( {alpha: 0}, 5000, "Linear", true);
+      this.game.add.tween(this.wind).to( {volume: 0}, 5000, "Linear", true);
+      this.finalMusic.play();
     }
 
     this.game.physics.arcade.collide(this.player, this.collisionLayer);
@@ -104,6 +121,12 @@ ChillGame.testGameState.prototype = {
     this.whiteout.y = this.player.y+20;
     this.fog.tilePosition.x += 0.5;
     this.whiteout.alpha = (101 - this.player.health) / 100;
+    this.coldSound.volume = 0;
+    this.wind.volume = 0.4;
+    if(this.player.health < 50){
+      this.wind.volume = (this.player.health / 50) * 0.4;
+      this.coldSound.volume = ((50 - this.player.health) / 50) * 0.1;
+    }
 
     this.maskGraphics.clear();
 
@@ -132,7 +155,7 @@ ChillGame.testGameState.prototype = {
     }
     this.maskGraphics.lineTo(this.player.x+20, this.player.y+20);
     this.maskGraphics.endFill();
-    this.debugText.text = "Player "+this.player.debugText()+"\n";
+    //this.debugText.text = "Player "+this.player.debugText()+"\n";
   },
 
   goToState: function(state){

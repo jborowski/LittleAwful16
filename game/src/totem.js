@@ -19,6 +19,7 @@ var Totem = function(conflux, game, x, y, key, group) {
     if(!this.active && (this.playerProximity < 2*gridSize)){
       this.active = true;
       conflux.player.totemsFound += 1;
+      conflux.totemSound.play();
       game.add.tween(this.glow).to( { alpha: 0.5 }, 1000, "Linear", true);
     }
     if(this.active && (this.playerProximity < 4*gridSize) && conflux.player.health < 100){

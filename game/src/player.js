@@ -30,11 +30,16 @@ var Player = function(conflux, game, x, y, key, group) {
 
   this.blocked = false;
 
+  this.steps = this.game.add.audio('steps', 0.15, true);
+
   this.update = function(){
     this.body.velocity.x = 0;
     this.body.velocity.y = 0;
     if(this.health > 0 && this.y >= gridSize*10){
       this.health -= 0.025;
+    }
+    if (!this.steps.isPlaying){
+      this.steps.play();
     }
     if(!this.blocked && this.cursors.left.isDown){
       this.body.velocity.x = -1*this.speed;
@@ -54,6 +59,7 @@ var Player = function(conflux, game, x, y, key, group) {
       this.facing = Math.PI*3/2;
     } else {
       this.animations.stop();
+      this.steps.stop();
     }
   }
 
