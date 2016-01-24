@@ -2,6 +2,15 @@
 
 # in order to run this script, install PIL/Pillow module:
 # $ pip install pillow
+#
+# This script generates Tiled JSON map data based on a PNG pixelart with pixel
+# colors corresponding to different tiles on the tileset.
+#
+# usage:
+# python png2tiles.py src_dir dest_dir
+#
+# src_dir - directory with pixelart and tileset
+# dest_dir - directory where the json file will be saved
 
 from PIL import Image
 import json
@@ -18,7 +27,7 @@ print "Generating level from "+source+" to "+target
 
 # put the input png file and tileset image in the same folder as this script
 # provide the input/output data in the form of a list of tuples:
-# (input image filename, tileset filename, tileset scripting name)
+# (tileset scripting name, tileset filename)
 input_data = [( "backgroundLayer","tileset"),
               ( "collisionLayer","tileset")]
 
@@ -33,6 +42,8 @@ for layer, tiles in input_data:
 
   formatted_data = []
 
+  # edit this part with RGBA color code of tile, and corresponding tile number
+  # on the tileset image (numbers starting with 1)
   tile_ids = {
     # white - ground
     (255,255,255,255): 1,
